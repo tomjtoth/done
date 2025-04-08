@@ -1,4 +1,4 @@
-# DONE IT
+# Kuvaus
 
 An activity tracker for multiple users.
 
