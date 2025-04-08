@@ -15,4 +15,4 @@ npm install
 npm run dev
 ```
 
-Essee löytyy [täältä](https://www.overleaf.com/read/nzpmmysnpcvn#1e876d).
+Essee löytyy [täältä](./essay.md).
