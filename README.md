@@ -9,8 +9,8 @@ Myös palautusrepo HY:n [kurssille](https://cybersecuritybase.mooc.fi/module-3.1
 Aja alla komentoja saadaksesi toimimaan projektin Linux koneellasi:
 
 ```bash
-git clone https://github.com/tomjtoth/done-it
-cd done-it
+git clone https://github.com/tomjtoth/done
+cd done
 npm install
 npm run dev
 ```
