@@ -1,0 +1,9 @@
+services:
+  app:
+    container_name: done
+    image: tomjtoth/done
+    build:
+      context: .
+      tags:
+        - tomjtoth/done
+    restart: unless-stopped
