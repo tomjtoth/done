@@ -13,8 +13,11 @@ COPY --from=builder /app/.next .
 COPY --from=builder /app/public .
 COPY --from=builder /app/migrations .
 
-ENV NODE_ENV=production
-ENV PORT=80
+ENV \
+    NODE_ENV=production \
+    PORT=80 \
+    DB_PATH=data/prod.db
+
 EXPOSE 80
 
 CMD ["npm", "start"]
