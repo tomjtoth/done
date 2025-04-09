@@ -7,3 +7,5 @@ services:
       tags:
         - tomjtoth/done
     restart: unless-stopped
+    volumes:
+      - ./data:/app/data
