@@ -6,7 +6,7 @@ let db: Database | undefined;
 export async function getDb() {
   if (!db) {
     db = await open({
-      filename: process.env.PATH_TO_DB || "dev.db",
+      filename: process.env.DB_PATH || "dev.db",
       driver: sqlite3.Database,
     });
     await db.migrate();
