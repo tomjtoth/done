@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { loginUser } from "@/app/actions";
+import { loginUser } from "@/app/actions/users";
 
 export const metadata: Metadata = {
   title: "Login",
