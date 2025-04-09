@@ -15,10 +15,16 @@ export async function createUser(data: FormData) {
 
   const db = await getDb();
   // https://owasp.org/Top10/A03_2021-Injection/
-  await db.run(`
-    insert into users (name, email, password)
-    values ('${name}', '${email}', '${password}');
-    `);
+  const sql = `insert into users (name, email, password)
+    values ('${name}', '${email}', '${password}');`;
+  await db.exec(sql);
+
+  // using SQL will sanitize the user input FIXING this ISSUE
+  // const sql = SQL`insert into users (name, email, password)
+  //   values (${name}, ${email}, ${password});`;
+  // await db.run(sql);
+
+  console.debug("the following SQL was executed on the DB:", sql);
   redirect("/login");
 }
 
