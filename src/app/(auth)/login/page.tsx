@@ -8,20 +8,24 @@ export const metadata: Metadata = {
 
 export default function Users() {
   return (
-    <form className="flex flex-col items-center *:border *:p-2 p-2 gap-2 [&_label]:pr-2">
-      <div>
-        <label htmlFor="email">email:</label>
-        <input type="text" name="email" />
-      </div>
+    <>
+      <h3 className="text-center">Login</h3>
 
-      <div>
-        <label htmlFor="password">password:</label>
-        <input type="text" name="password" />
-      </div>
+      <form className="flex flex-col items-center *:border *:p-2 p-2 gap-2 [&_label]:pr-2">
+        <div>
+          <label htmlFor="email">email:</label>
+          <input type="text" name="email" />
+        </div>
 
-      <button className="cursor-pointer" formAction={loginUser}>
-        Login
-      </button>
-    </form>
+        <div>
+          <label htmlFor="password">password:</label>
+          <input type="text" name="password" />
+        </div>
+
+        <button className="cursor-pointer" formAction={loginUser}>
+          Login
+        </button>
+      </form>
+    </>
   );
 }
