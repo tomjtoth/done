@@ -14,7 +14,7 @@ export default async function Events() {
       <ul>
         {events.map((ev) => (
           <li key={ev.id}>
-            {ev.name} ({ev.owner})
+            <Link href={`/events/${ev.id}`}>{ev.name}</Link> ({ev.owner})
           </li>
         ))}
       </ul>
