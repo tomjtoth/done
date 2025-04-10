@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 export default function Users() {
   return (
     <>
-      <h3>Create new user</h3>
+      <h3 className="text-center">Create new user</h3>
+
       <form className="flex flex-col items-center *:border *:p-2 p-2 gap-2 [&_label]:pr-2">
         <div>
           <label htmlFor="name">name:</label>
