@@ -5,11 +5,12 @@ import SQL from "sql-template-strings";
 
 import { getDb } from "@/lib/db";
 
-export type Ev = {
+type Ev = {
   id?: number;
   user_id: number;
   name: string;
   description: string;
+  owner?: string;
 };
 
 export async function createEvent(data: FormData) {
@@ -26,5 +27,11 @@ export async function createEvent(data: FormData) {
 
 export async function getEvents(): Promise<Ev[]> {
   const db = await getDb();
-  return await db.all("select * from events");
+
+  return await db.all(`
+    select e.*, u.name as owner
+    from events e
+    inner join users u
+    on e.user_id == u.id
+  `);
 }
