@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 import SQL from "sql-template-strings";
 
 import { getDb } from "@/lib/db";
-import { A03_2021 } from "@/lib/vulnerabilities";
 
 type User = { id?: number; name: string; email: string; password: string };
 
@@ -15,23 +14,9 @@ export async function createUser(data: FormData) {
   const password = data.get("password") as string;
 
   const db = await getDb();
+  await db.run(SQL`insert into users (name, email, password)
+    values (${name}, ${email}, ${password});`);
 
-  let sql;
-
-  if (A03_2021) {
-    sql = `insert into users (name, email, password)
-      values ('${name}', '${email}', '${password}');`;
-
-    await db.exec(sql);
-  } else {
-    // using SQL will sanitize and quote the user input FIXING this ISSUE
-    sql = SQL`insert into users (name, email, password)
-      values (${name}, ${email}, ${password});`;
-
-    await db.run(sql);
-  }
-
-  console.debug("the following SQL was executed on the DB:", sql);
   redirect("/login");
 }
 
