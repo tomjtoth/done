@@ -11,7 +11,7 @@ export default function Users() {
     <>
       <h3 className="text-center">Login</h3>
 
-      <form className="flex flex-col items-center *:border *:p-2 p-2 gap-2 [&_label]:pr-2">
+      <form className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2">
         <div>
           <label htmlFor="email">email:</label>
           <input type="text" name="email" />
