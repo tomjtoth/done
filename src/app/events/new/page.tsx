@@ -1,29 +1,34 @@
 import type { Metadata } from "next";
 
 import { getUsers, createEvent } from "@/lib/actions";
+import { A01_2021 } from "@/lib/vulnerabilities";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "New Event",
 };
 
 export default async function Events() {
-  const users = await getUsers();
+  if (!A01_2021 && !(await cookies()).get("session")) redirect("/login");
 
   return (
     <>
       <h3 className="text-center">Create new event</h3>
 
       <form className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2">
-        <div>
-          <label htmlFor="user_id">user_id:</label>
-          <select name="user_id">
-            {users.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        {A01_2021 && (
+          <div>
+            <label htmlFor="user_id">user_id:</label>
+            <select name="user_id">
+              {(await getUsers()).map((u) => (
+                <option key={u.id} value={u.id}>
+                  {u.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div>
           <label htmlFor="name">name:</label>
