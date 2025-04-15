@@ -1,10 +1,11 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import SQL from "sql-template-strings";
 
 import { getDb } from "@/lib/db";
-import { A03_2021, A09_2021 } from "../vulnerabilities";
+import { A01_2021, A03_2021, A09_2021 } from "../vulnerabilities";
 
 type Ev = {
   id?: number;
@@ -17,7 +18,9 @@ type Ev = {
 export async function createEvent(data: FormData) {
   const name = data.get("name");
   const description = data.get("description");
-  const user_id = Number(data.get("user_id"));
+  const user_id = A01_2021
+    ? Number(data.get("user_id"))
+    : JSON.parse((await cookies()).get("session")!.value).id;
 
   const db = await getDb();
 
