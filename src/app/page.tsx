@@ -1,4 +1,4 @@
-import { A03_2021, A09_2021 } from "@/lib/vulnerabilities";
+import { A01_2021, A03_2021, A09_2021 } from "@/lib/vulnerabilities";
 
 export default function Home() {
   return (
@@ -23,6 +23,17 @@ export default function Home() {
                 description of new event'); update users set name='pwned' where
                 id=1; --
               </code>
+            </p>
+          </li>
+        )}
+        {A01_2021 && (
+          <li>
+            <h4>A01 - OWASP 2021</h4>
+            <p>
+              Creating events and assigning other users as owners is currently
+              possible, actually it doesn't even require an active user session,
+              so an anonymous visitor can also create events in the system,
+              which is undesirable.
             </p>
           </li>
         )}
