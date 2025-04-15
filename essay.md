@@ -10,9 +10,10 @@ Since the event creation form simply concatenates the user input [2], a maliciou
 
 FLAW 2:
 
-"Violation of the principle of least privilege or deny by default, where access should only be granted for particular capabilities, roles, or users, but is available to anyone." [A01]
+A clear case of "violation of the principle of least privilege or deny by default, where access should only be granted for particular capabilities, roles, or users, but is available to anyone." [A01]
 
-make it so, that the event of user 1 can be edited by user 2
+Creating new events is not really productive by default: a user has to select the creator users's id from an html select tag [A01vw], making it possible for user1 to create an event with an owner of a different user. Furthermore a user session is not even necessary for the event to be successfully created, any anonymous visitor can do so.
+However, after setting this vulnerability's toggle to `false` in [SW], the related view [A01vw] wouldn't list users any longer, and the related logic [A01cd] retrieves the current user's id from the active session, and assigns it to the created event as `user_id`.
 
 FLAW 3:
 in case of 2 users, the first user can delete the 2nd user via submitting `DELETE /users/2`
@@ -29,6 +30,10 @@ Before flipping the switch in [SW] none of the following events are logged: user
 [SW] https://github.com/tomjtoth/done/blob/main/src/lib/vulnerabilities.ts
 [A03] https://owasp.org/Top10/A03_2021-Injection/
 [A03code] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
+
+[A01] https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+[A01vw] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
+[A01cd] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
 
 [A02] https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
 
