@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import SQL from "sql-template-strings";
 
 import { getDb } from "@/lib/db";
-import { A03_2021 } from "../vulnerabilities";
+import { A03_2021, A09_2021 } from "../vulnerabilities";
 
 type Ev = {
   id?: number;
@@ -36,7 +36,14 @@ export async function createEvent(data: FormData) {
     await db.run(sql);
   }
 
-  console.debug("the following SQL was executed on the DB:", sql);
+  if (!A09_2021)
+    console.log("A09_2021 - new event created:", {
+      user_id,
+      name,
+      description,
+    });
+
+  console.debug("A03_2021 - the following SQL was executed on the DB:\n", sql);
   redirect("/events");
 }
 
