@@ -60,3 +60,16 @@ export async function getEvents(): Promise<Ev[]> {
     on e.user_id == u.id
   `);
 }
+
+export async function deleteEvent(id: number) {
+  if (!A01_2021 && !(await cookies()).get("session")) return redirect("/login");
+
+  const db = await getDb();
+
+  await db.run(SQL`
+    delete from events
+    where id = ${id}
+  `);
+
+  redirect("/events");
+}
