@@ -12,8 +12,8 @@ FLAW 2:
 
 A clear case of "violation of the principle of least privilege or deny by default, where access should only be granted for particular capabilities, roles, or users, but is available to anyone." [A01]
 
-Creating new events is not really productive by default: a user has to select the creator users's id from an html select tag [A01vw], making it possible for user1 to create an event with an owner of a different user. Furthermore a user session is not even necessary for the event to be successfully created, any anonymous visitor can do so.
-However, after setting this vulnerability's toggle to `false` in [SW], the related view [A01vw] wouldn't list users any longer, and the related logic [A01cd] retrieves the current user's id from the active session, and assigns it to the created event as `user_id`.
+Creating new events is not really productive by default: a user has to select the creator users's id from an html select tag [A01vw], making it possible for a user to create an event with an owner of a different user. Furthermore an active user session is not even necessary for the event to be successfully created, any anonymous visitor can do so.
+However, after setting this vulnerability's toggle to `false` in [SW], the related view [A01vw] wouldn't list users any longer, the related logic [A01cd] retrieves the current user's id from the active session and assigns it to the created event as `user_id`. Without a valid session, any visitor gets redirected to the `/login` page. The same goes for deletion of events, there's an additional check for an active use session before even rendering the delete button [A01_vw2] and the same check is done before attempting to delete [A01_cd2].
 
 FLAW 3:
 in case of 2 users, the first user can delete the 2nd user via submitting `DELETE /users/2`
@@ -32,8 +32,10 @@ Before flipping the switch in [SW] none of the following events are logged: user
 [A03code] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
 
 [A01] https://owasp.org/Top10/A01_2021-Broken_Access_Control/
-[A01vw] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
-[A01cd] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts#L26
+[A01vw] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts
+[A01cd] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts
+[A01vw2] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts
+[A01cd2] https://github.com/tomjtoth/done/blob/main/src/lib/actions/events.ts
 
 [A02] https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
 
