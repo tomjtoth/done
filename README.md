@@ -12,6 +12,7 @@ Aja alla komentoja saadaksesi toimimaan projektin Linux koneellasi:
 ```bash
 git clone https://github.com/tomjtoth/done
 cd done
+echo "JWT_SECRET=$(uuidgen)" > .env
 npm install
 npm run dev
 ```
