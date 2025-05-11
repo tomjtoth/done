@@ -1,11 +1,11 @@
 services:
   app:
-    container_name: done
-    image: tomjtoth/done
+    container_name: events
+    image: tomjtoth/events
     build:
       context: .
       tags:
-        - tomjtoth/done
+        - tomjtoth/events
     restart: unless-stopped
     volumes:
       - ./data:/app/data

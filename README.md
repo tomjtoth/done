@@ -10,8 +10,8 @@ Tavoitteena on sisältää ainakin 5kpl haavoittuvuutta [OWASP:in 2021 listalta]
 Aja alla komentoja saadaksesi toimimaan projektin Linux koneellasi:
 
 ```bash
-git clone https://github.com/tomjtoth/done
-cd done
+git clone https://github.com/tomjtoth/events
+cd events
 echo "JWT_SECRET=$(uuidgen)" > .env
 npm install
 npm run dev

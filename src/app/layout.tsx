@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Done",
+  title: "Events",
   description: "An activity tracker",
 };
 
