@@ -1,4 +1,4 @@
-import { A01_2021, A03_2021, A09_2021 } from "@/lib/vulnerabilities";
+import { A01_2021, A02_2021, A03_2021, A09_2021 } from "@/lib/vulnerabilities";
 
 export default function Home() {
   return (
@@ -34,6 +34,17 @@ export default function Home() {
               possible, actually it doesn&apos;t even require an active user
               session, so an anonymous visitor can also create events in the
               system, which is undesirable.
+            </p>
+          </li>
+        )}
+        {A02_2021 && (
+          <li>
+            <h4>A02 - OWASP 2021</h4>
+            <p>
+              The &quot;session&quot; named cookie contains the current
+              user&apos;s ID in plain text, which can be modified in order to
+              fake user identity during event creation and deletion (provided{" "}
+              <code>A01_2021</code> is already turned off).
             </p>
           </li>
         )}
