@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { getUsers, createEvent } from "@/lib/actions";
 import { A01_2021 } from "@/lib/vulnerabilities";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { getSession } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "New Event",
 };
 
 export default async function Events() {
-  if (!A01_2021 && !(await cookies()).get("session")) redirect("/login");
+  if (!A01_2021 && !(await getSession())) redirect("/login");
 
   return (
     <>

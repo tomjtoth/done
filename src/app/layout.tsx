@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import { logoutUser } from "@/lib/actions";
+import { getSession } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,8 +46,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookie = (await cookies()).get("session");
-  const session = cookie ? JSON.parse(cookie.value) : null;
+  const session = await getSession();
 
   return (
     <html lang="en">
