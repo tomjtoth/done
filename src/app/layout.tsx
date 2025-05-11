@@ -24,9 +24,8 @@ export const metadata: Metadata = {
 type View = { href: string; label: string };
 
 const baseViews = [
-  { href: "/", label: "home" },
-  { href: "/users", label: "users" },
   { href: "/events", label: "events" },
+  { href: "/users", label: "users" },
 ];
 
 const anonymous = [
