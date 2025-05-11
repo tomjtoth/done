@@ -10,6 +10,5 @@ export async function getSession(): Promise<SessUser | null> {
 }
 
 export function getToken(session: SessUser) {
-  console.debug("using JWT_SECRET: ", JWT_SECRET);
   return jwt.verify(session.token!, JWT_SECRET) as SessUser;
 }
