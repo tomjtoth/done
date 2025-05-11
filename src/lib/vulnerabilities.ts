@@ -9,6 +9,11 @@ export const A03_2021 = true;
 export const A01_2021 = true;
 
 /**
+ * https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+ */
+export const A02_2021 = true;
+
+/**
  * https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/
  */
 export const A09_2021 = true;
