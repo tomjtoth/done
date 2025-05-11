@@ -42,3 +42,7 @@ ul {
 input {
   @apply border rounded;
 }
+
+code {
+  @apply bg-gray-300 font-mono text-lg;
+}

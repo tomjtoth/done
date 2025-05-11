@@ -19,7 +19,7 @@ export default function Home() {
               SQL injection is currently possible on this site: a malicious user
               might alter some other user&apos;s name by creating an event with
               the following content in the description field:{" "}
-              <code className="bg-gray-300 font-mono text-lg">
+              <code>
                 description of new event&apos;); update users set
                 name=&apos;pwned&apos; where id=1; --
               </code>
