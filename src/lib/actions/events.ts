@@ -1,11 +1,12 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import SQL from "sql-template-strings";
 
 import { getDb } from "@/lib/db";
-import { A01_2021, A03_2021, A09_2021 } from "../vulnerabilities";
+import { getSession, getToken } from "@/lib/utils";
+
+import { A01_2021, A02_2021, A03_2021, A09_2021 } from "../vulnerabilities";
 
 type Ev = {
   id?: number;
@@ -18,9 +19,21 @@ type Ev = {
 export async function createEvent(data: FormData) {
   const name = data.get("name");
   const description = data.get("description");
-  const user_id = A01_2021
-    ? Number(data.get("user_id"))
-    : JSON.parse((await cookies()).get("session")!.value).id;
+  let userId = Number(data.get("user_id"));
+
+  if (!A01_2021) {
+    const sess = await getSession();
+    if (!sess) {
+      if (!A09_2021)
+        console.log(
+          "A09_2021 - tried creating an Event without a user session"
+        );
+
+      return redirect("/login");
+    }
+
+    userId = A02_2021 ? sess.id! : getToken(sess).id!;
+  }
 
   const db = await getDb();
 
@@ -28,20 +41,20 @@ export async function createEvent(data: FormData) {
 
   if (A03_2021) {
     sql = `insert into events (user_id, name, description)
-      values (${user_id}, '${name}', '${description}');`;
+      values (${userId}, '${name}', '${description}');`;
 
     await db.exec(sql);
   } else {
     // using SQL will sanitize and quote the user input FIXING this ISSUE
     sql = SQL`insert into events (user_id, name, description)
-      values (${user_id}, ${name}, ${description});`;
+      values (${userId}, ${name}, ${description});`;
 
     await db.run(sql);
   }
 
   if (!A09_2021)
     console.log("A09_2021 - new event created:", {
-      user_id,
+      userId,
       name,
       description,
     });
@@ -62,14 +75,40 @@ export async function getEvents(): Promise<Ev[]> {
 }
 
 export async function deleteEvent(id: number) {
-  if (!A01_2021 && !(await cookies()).get("session")) return redirect("/login");
-
   const db = await getDb();
 
-  await db.run(SQL`
-    delete from events
-    where id = ${id}
-  `);
+  if (!A01_2021) {
+    const sess = await getSession();
+    if (!sess) {
+      if (!A09_2021)
+        console.log("tried deleting event: ", id, "without an active session");
+
+      return redirect("/login");
+    }
+
+    const extractFromEvent = await db.get<Pick<Ev, "user_id">>(
+      SQL`select user_id from events where id = ${id}`
+    );
+
+    if (!extractFromEvent) {
+      if (!A09_2021) console.log("tried deleting non existent event: ", id);
+      return;
+    }
+
+    const ownerId = extractFromEvent.user_id;
+    const sessId = A02_2021 ? sess.id! : getToken(sess).id!;
+
+    if (ownerId !== sessId) {
+      if (!A09_2021)
+        console.log(`user "${sessId}" tried to delete user's ${ownerId} event`);
+
+      return;
+    }
+  }
+
+  await db.run(SQL`delete from events where id = ${id}`);
+
+  if (!A09_2021) console.log("deleted event:", id);
 
   redirect("/events");
 }
