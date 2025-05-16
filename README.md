@@ -1,6 +1,6 @@
 # Kuvaus
 
-Tämä on feikki web-sovelluksen palautusrepo HY:n [kurssille](https://cybersecuritybase.mooc.fi/module-3.1), joka on deplattu [tänne](https://events.ttj.hu). Tavoitteena on sisältää ainakin 5kpl haavoittuvuutta [OWASP:in 2021 listalta](https://owasp.org/www-project-top-ten/).
+Tämä on web-sovellus on palautus HY:n [kurssille](https://cybersecuritybase.mooc.fi/module-3.1), sisältää 5kpl haavoittuvuutta [OWASP:in 2021 listalta](https://owasp.org/www-project-top-ten/) ja on deplattu [tänne](https://events.ttj.hu).
 
 ## Apu tarkastajille
 
