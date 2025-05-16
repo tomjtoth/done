@@ -1,4 +1,10 @@
+import { Metadata } from "next";
+
 import { getUsers } from "@/lib/actions";
+
+export const metadata: Metadata = {
+  title: "Users",
+};
 
 export default async function ListUsers() {
   const users = await getUsers();
