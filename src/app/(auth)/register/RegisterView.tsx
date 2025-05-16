@@ -16,17 +16,15 @@ export default function Register() {
     const verify = (form.elements.namedItem("verify") as HTMLInputElement)
       .value;
 
-    if (password !== verify) {
-      e.preventDefault();
+    const alerts: string[] = [];
 
-      return alert("Passwords do not match!");
-    }
+    if (password !== verify) alerts.push("Passwords do not match!");
 
-    if (PW_PARTS.map((re) => password.match(re)).some((x) => !x)) {
-      e.preventDefault();
+    if (PW_PARTS.map((re) => password.match(re)).some((x) => !x))
+      alerts.push("PW must contain at least 1 from each range: A-Z, a-z, 0-9");
 
-      return alert("PW must contain at least 1 from each range: A-Z, a-z, 0-9");
-    }
+    if (alerts.length > 0) e.preventDefault();
+    alerts.forEach((msg) => alert(msg));
   };
 
   return (
@@ -34,7 +32,7 @@ export default function Register() {
       <h3 className="text-center">Create new user</h3>
       <form
         ref={formRef}
-        className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2"
+        className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2 [&_input]:px-1"
         onSubmit={handleSubmit}
         action={createUser}
         method="post"
