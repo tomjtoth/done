@@ -1,11 +1,6 @@
-import { Metadata } from "next";
 import Link from "next/link";
 
 import { getEvents } from "@/lib/actions";
-
-export const metadata: Metadata = {
-  title: "Events",
-};
 
 export default async function Events() {
   const events = await getEvents();
