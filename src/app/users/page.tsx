@@ -14,9 +14,7 @@ export default async function ListUsers() {
       <h3>Existing users:</h3>
       <ul>
         {users.map((user, i) => (
-          <li key={i}>
-            {user.name} (email: {user.email})
-          </li>
+          <li key={i}>{user.name}</li>
         ))}
       </ul>
     </>

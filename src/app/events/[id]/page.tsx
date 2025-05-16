@@ -16,13 +16,15 @@ export default async function Events({
   return (
     <>
       <h3>
-        {ev.name}
-        <sub>by {ev.owner}</sub>
+        {ev.name}{" "}
+        <sub>
+          by <i>{ev.owner}</i>
+        </sub>
       </h3>
 
-      <h4>This event is about</h4>
+      <h4>Event description:</h4>
       <p>{ev.description}</p>
-      {(A01_2021 || (!A01_2021 && (await getSession()))) && (
+      {(A01_2021 || (!A01_2021 && (await getSession())?.id === ev.user_id)) && (
         <DeleteButton eventId={ev.id!} />
       )}
     </>
