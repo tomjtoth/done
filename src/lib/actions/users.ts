@@ -33,6 +33,12 @@ export async function createUser(data: FormData) {
   const name = data.get("name") as string;
   const email = data.get("email") as string;
   const password = data.get("password") as string;
+  const verify = data.get("verify") as string;
+
+  if (password !== verify) {
+    if (!A09_2021) console.log("password mismatch");
+    return;
+  }
 
   if (!A07_2021) {
     if (name === password || email === password) {
