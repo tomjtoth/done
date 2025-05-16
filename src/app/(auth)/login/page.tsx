@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Login",
 };
 
-export default function Users() {
+export default function Login() {
   return (
     <>
       <h3 className="text-center">Login</h3>
@@ -14,12 +14,12 @@ export default function Users() {
       <form className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2">
         <div>
           <label htmlFor="email">email:</label>
-          <input type="text" name="email" />
+          <input type="email" name="email" />
         </div>
 
         <div>
           <label htmlFor="password">password:</label>
-          <input type="text" name="password" />
+          <input type="password" name="password" />
         </div>
 
         <button className="cursor-pointer" formAction={loginUser}>
