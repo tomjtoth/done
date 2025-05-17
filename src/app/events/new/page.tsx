@@ -16,7 +16,7 @@ export default async function Events() {
     <>
       <h3 className="text-center">Create new event</h3>
 
-      <form className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2">
+      <form className="flex flex-col items-center *:border *:rounded *:p-2 p-2 gap-2 [&_label]:pr-2 [&_input]:px-1">
         {A01_2021 && (
           <div>
             <label htmlFor="user_id">user_id:</label>
