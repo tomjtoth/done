@@ -47,7 +47,7 @@ export async function createUser(data: FormData) {
       return;
     }
 
-    if (TOP10k_PW_LIST.includes(password)) {
+    if (TOP10k_PW_LIST.includes(password.toLocaleLowerCase())) {
       if (!A09_2021) console.log("new user's password is present in top10k");
       return;
     }
