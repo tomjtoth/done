@@ -12,6 +12,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/migrations ./migrations
+COPY --from=builder /app/10k-worst-passwords.txt ./10k-worst-passwords.txt
 
 ENV \
     NODE_ENV=production \
