@@ -1,6 +1,6 @@
 # Kuvaus
 
-Tämä on web-sovellus on palautus HY:n [kurssille](https://cybersecuritybase.mooc.fi/module-3.1), sisältää 5kpl haavoittuvuutta [OWASP:in 2021 listalta](https://owasp.org/www-project-top-ten/) ja on deplattu [tänne](https://events.ttj.hu).
+Tämä web-sovellus on palautus HY:n [kurssille](https://cybersecuritybase.mooc.fi/module-3.1), sisältää 5kpl haavoittuvuutta [OWASP:in 2021 listalta](https://owasp.org/www-project-top-ten/) ja on deplattu [tänne](https://events.ttj.hu).
 
 ## Apu tarkastajille
 
